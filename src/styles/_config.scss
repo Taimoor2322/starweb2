@@ -1,0 +1,32 @@
+$max-width: 1920px;
+$border-radius: 12px;
+$font-poppins: "Poppins", sans-serif;
+$font-inter: "Inter", sans-serif;
+
+$background-bg: #ffffff;
+$text-clr: #1a202c;
+$text-lite-clr: #718096;
+
+$primary-clr: #2c706c;
+$secondary-clr: #f5f9ff;
+
+$secondary-glow: rgba(176, 209, 254, 0.13);
+
+@mixin sm-screen {
+  @media (max-width: 640px) { @content; }
+}
+@mixin md-screen {
+  @media (max-width: 768px) { @content; }
+}
+@mixin lg-screen {
+  @media (max-width: 1023px) { @content; }
+}
+
+// For Navbar fixes
+@mixin first-breakpoint {
+  @media (max-width: 1360px){ @content; }
+}
+
+@mixin second-breakpoint {
+  @media (max-width: 1263px){ @content; }
+}

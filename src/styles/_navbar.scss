@@ -1,0 +1,328 @@
+.navbar-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 60px;
+  z-index: 50;
+
+  &__brand {
+    width: 200px;
+
+    @include first-breakpoint {
+      width: 126px;
+    }
+
+    @include second-breakpoint {
+      width: 80px;
+    }
+
+    &__toggle {
+      display: none;
+    }
+  }
+
+  &__navList {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__lftMenu {
+      display: flex;
+      list-style-type: none;
+
+      .navbar-dropdown {
+        position: relative;
+
+        .hover-cta {
+          position: absolute;
+          top: -30px;
+          right: 0;
+          font-family: $font-inter;
+          font-size: 10px;
+          font-weight: 600;
+          color: #fff;
+          text-align: center;
+          width: fit-content;
+          background: $primary-clr;
+          padding: 3px 5px;
+          border-radius: 50px;
+
+          &::after {
+            content: "";
+            position: absolute;
+            background: $primary-clr;
+            top: 40%;
+            left: 40%;
+            width: 26px;
+            height: 10px;
+            transform: rotate(135deg);
+            z-index: -1;
+          }
+        }
+
+        &__btn {
+          font-family: $font-poppins;
+          font-size: 18px;
+          cursor: pointer;
+
+          @include second-breakpoint {
+            font-size: 16px;
+          }
+        }
+
+        &__submenu {
+          position: absolute;
+          width: 300px;
+          height: auto;
+          top: 30px;
+          background: #fff;
+          border: 1px solid hsla(0, 0%, 87%, 0.8);
+          border-radius: 8px;
+          box-shadow: 1px 1px 10px 0px rgb(226 226 226 / 52%);
+          list-style-type: none;
+          opacity: 0;
+          visibility: hidden;
+          transform: translatey(20px);
+          transition: transform, 0.3s all;
+
+          li {
+            padding-right: 0 !important;
+            a {
+              font-family: $font-poppins;
+              font-size: 16px;
+              color: #595959;
+              padding: 10px 20px;
+              display: inline-block;
+              width: 100%;
+              transition: 0.3s all;
+
+              &:hover {
+                background: #b0d1fe21;
+              }
+
+              @include second-breakpoint {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          .navbar-dropdown__submenu {
+            opacity: 1;
+            visibility: visible;
+            transform: translatey(0px);
+          }
+        }
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child) {
+          padding-right: 35px;
+
+          @include second-breakpoint {
+            padding-right: 25px;
+          }
+        }
+        a {
+          font-family: $font-poppins;
+          font-size: 18px;
+          color: #595959;
+          transition: 0.3s all;
+
+          &:hover {
+            color: #000;
+          }
+
+          @include second-breakpoint {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    &__CTA {
+      display: flex;
+      align-items: center;
+      column-gap: 26px;
+
+      @include second-breakpoint {
+        column-gap: 15px;
+      }
+
+      &__Btn {
+        font-size: 18px;
+        line-height: 29px;
+        font-weight: 700;
+        background: $background-bg;
+        color: $primary-clr;
+        padding: 6px 30px;
+        border-radius: 50px;
+        transition: 0.3s all;
+
+        &:hover {
+          background: #e0e0e0;
+        }
+
+        @include first-breakpoint {
+          padding: 3px 15px;
+        }
+
+        @include second-breakpoint {
+          font-size: 16px;
+          padding: 3px 12px;
+        }
+      }
+    }
+  }
+}
+
+// Mobile Navbar
+@include lg-screen {
+  .navbar-top {
+    position: relative;
+    flex-direction: column;
+    align-items: normal;
+    padding-block: 30px;
+
+    &__brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      z-index: 1000;
+
+      img {
+        width: 80px;
+        height: 68px;
+      }
+
+      &__toggle {
+        width: 30px;
+        height: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+
+        span {
+          width: 100%;
+          height: 4px;
+          background-color: #333;
+          transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        &.active {
+          span {
+            &:nth-child(1) {
+              transform: translateY(13px) rotate(45deg);
+            }
+            &:nth-child(2) {
+              opacity: 0;
+            }
+            &:nth-child(3) {
+              transform: translateY(-8px) rotate(-45deg);
+            }
+          }
+        }
+      }
+    }
+
+    &__navList {
+      position: absolute;
+      top: 88%;
+      width: 100%;
+      height: 87vh;
+      left: 0;
+      background-color: $background-bg;
+      flex-direction: column;
+      align-items: normal;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+
+      &.active-toggle{
+        transform: translateY(0%);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      &__lftMenu {
+        flex-direction: column;
+
+        .navbar-dropdown {
+          width: 100%;
+
+          .hover-cta{
+            display: none;
+          }
+
+          &__btn {
+            font-size: 18px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          &__submenu{
+            position: relative;
+            width: 100%;
+            top: 0;
+            transform: translatey(0);
+            padding-left: 18px;
+            opacity: 1;
+            visibility: visible;
+            border: 0;
+            box-shadow: none;
+          }
+        }
+
+        li {
+          display: inline-block;
+          &:not(:last-child) {
+            padding-right: 0;
+          }
+
+          display: flex;
+          justify-content: space-between;
+
+          a {
+            display: block;
+            padding: 15px 20px;
+            font-size: 18px;
+          }
+        }
+      }
+
+      &__CTA {
+        width: 100%;
+        column-gap: 0;
+
+        &__searchBtn {
+          display: none;
+        }
+
+        &__Btn {
+          background-color: $primary-clr;
+          color: $secondary-clr;
+          padding-block: 8px;
+          border-radius: 0;
+          width: 100%;
+          text-align: center;
+
+          &:last-child {
+            background-color: $secondary-clr;
+            color: $primary-clr;
+          }
+        }
+      }
+    }
+  }
+}
